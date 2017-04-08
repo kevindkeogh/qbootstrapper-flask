@@ -12,7 +12,7 @@ $(document).ready(function () {
             index += 1;
             var lastRow = $("#instruments-table tr:last");
             var newRow = lastRow.clone(true);
-            var rowNum = lastRow.attr("id").replace(/[^0-9.]/g, "");
+            var rowNum = parseInt(lastRow.attr("id").replace(/[^0-9.]/g, ""));
             rowNum += 1;
             newRow.attr("id", "inst-" + rowNum);
             newRow.children().each(function () {
