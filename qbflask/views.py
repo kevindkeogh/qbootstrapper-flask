@@ -1,15 +1,16 @@
 #!/usr/bin/python3
 
-from flask import request, session, g, redirect, url_for, abort, render_template, flash
+from flask import request, render_template
 from qbflask import app
 from qbflask.forms import InstrumentList
+import qbflask.bootstrapper as bstrap
+import pprint
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = InstrumentList()
     if request.method == 'POST':
-        pass
-        # pprint.pprint(request.form)
+        data = bstrap.parse_request(request)
     return render_template('index.html', form=form)
 
 @app.route('/build_curve.html')

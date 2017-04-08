@@ -2,9 +2,11 @@
 
 import wtforms as wtf
 
+INSTRUMENT_TYPES = [('OISSwap', 'OIS Swap'), ('OISCashRate', 'OIS Cash Rate')]
+
 class Instrument(wtf.Form):
-    instrument_type = wtf.TextField('Instrument')
-    expiry = wtf.DateField('Expiry')
+    instrument_type = wtf.SelectField('Instrument', choices=INSTRUMENT_TYPES)
+    expiry = wtf.DateField('Expiry', '%Y-%m-%d')
     rate = wtf.DecimalField('Rate')
 
 class InstrumentList(wtf.Form):
