@@ -2,6 +2,7 @@
 
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 import wtforms as wtf
+import pprint
 
 app = Flask(__name__)
 
@@ -19,12 +20,15 @@ class Instrument(wtf.Form):
 
 class InstrumentList(wtf.Form):
     instruments = wtf.FieldList(wtf.FormField(Instrument), min_entries=3)
-    submit = wtf.SubmitField('Submit')
+    submit = wtf.SubmitField()
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     form = InstrumentList()
-    # raise
+    if request.method == 'POST':
+        pprint.pprint(request.form)
+        for key, value in request.form.items():
+            print(key, value)
     return render_template('index.html', form=form)
 
 @app.route('/build_curve.html')

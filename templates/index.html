@@ -5,9 +5,10 @@
     </head>
     <body>
         <p>
-	<button class="addInstrumentButton">Add instrument</button>
+        <button class="addInstrumentButton">Add instrument</button>
         <p>
-        <div class="input-instruments">
+        <form action="" method="POST">
+            <div class="input-instruments">
                 <table id="instruments-table">
                     <tr>
                         <th>Instrument Type</th>
@@ -24,9 +25,9 @@
                     </tr>
                     {% endfor %}
                 </table>
-            </form>
-        </div>
-        {{ form.submit }}
+                {{ form.submit() }}
+        </form>
+            </div>
             <script src="{{ url_for("static", filename="js/jquery-2.1.4.min.js") }}"></script>
             <script src="{{ url_for("static", filename="js/addInstrument.js") }}"></script>
     </body>
