@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        qBootstrapper Python
+    </head>
+    <body>
+        <p>
+	<button class="addInstrumentButton">Add instrument</button>
+        <p>
+        <div class="input-instruments">
+                <table id="instruments-table">
+                    <tr>
+                        <th>Instrument Type</th>
+                        <th>Expiry</th>
+                        <th>Rate</th>
+                        <th></th>
+                    </tr>
+                    {% for inst in form.instruments %}
+                    <tr id="inst-{{loop.index0}}">
+                        <td>{{ inst.instrument_type }}</td>
+                        <td>{{ inst.expiry }}</td>
+                        <td>{{ inst.rate }}</td>
+                        <td><button type="button" id="inst-{{loop.index0}}-remove" class="removeInstrumentButton">-</button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        </div>
+        {{ form.submit }}
+            <script src="{{ url_for("static", filename="js/jquery-2.1.4.min.js") }}"></script>
+            <script src="{{ url_for("static", filename="js/addInstrument.js") }}"></script>
+    </body>
+</html>
