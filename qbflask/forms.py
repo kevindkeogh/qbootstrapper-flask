@@ -11,5 +11,6 @@ class Instrument(wtf.Form):
     rate = wtffields.DecimalField('Rate')
 
 class InstrumentList(wtf.Form):
+    curve_date = wtffields.DateField('Curve date')
     instruments = wtf.FieldList(wtf.FormField(Instrument), min_entries=3)
     submit = wtf.SubmitField()

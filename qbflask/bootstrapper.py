@@ -4,20 +4,17 @@ import re
 
 def parse_request(request):
     '''Takes Flask request object and parses to dict for bootstrapping'''
-    nums = []
-    for key in request.form.keys():
-        nums.append(re.sub('\D', '', key))
-    nums = sorted(set(nums))
-    insts = dict.fromkeys(nums, None)
+    insts = {}
+    insts['insts'] = {}
     for key, value in request.form.items():
         if key == '': continue
         num = re.sub('\D', '', key)
         try:
             num = int(num)
+            if num not in insts['insts']: insts['insts'][num] = {}
+            term = key.split('-')[-1]
+            insts['insts'][num][term] = value
         except ValueError:
-            continue
-        if num not in insts: insts[num] = {}
-        term = key.split('-')[-1]
-        insts[num][term] = value
+            insts[key] = value
     return insts
 

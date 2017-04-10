@@ -9,6 +9,7 @@
         <p>
         <form action="" method="POST">
             <div class="input-instruments">
+                <p><b>Curve date:</b>  {{ form.curve_date }}</p>
                 <table id="instruments-table">
                     <tr>
                         <th>Instrument Type</th>
@@ -25,7 +26,7 @@
                     </tr>
                     {% endfor %}
                 </table>
-                {{ form.submit() }}
+                {{ form.submit }}
         </form>
             </div>
             <script src="{{ url_for("static", filename="js/jquery-2.1.4.min.js") }}"></script>

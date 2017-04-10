@@ -11,6 +11,7 @@ def index():
     form = InstrumentList()
     if request.method == 'POST':
         data = bstrap.parse_request(request)
+        pprint.pprint(data)
     return render_template('index.html', form=form)
 
 @app.route('/build_curve.html')
