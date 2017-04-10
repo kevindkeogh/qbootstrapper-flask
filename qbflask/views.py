@@ -4,16 +4,13 @@ from flask import request, render_template
 from qbflask import app
 from qbflask.forms import InstrumentList
 import qbflask.bootstrapper as bstrap
-import pprint
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
     form = InstrumentList()
-    if request.method == 'POST':
-        data = bstrap.parse_request(request)
-        pprint.pprint(data)
     return render_template('index.html', form=form)
 
-@app.route('/build_curve.html')
+@app.route('/build_curve', methods=['POST'])
 def build_curve():
-    return "Hello!"
+    data = bstrap.parse_form(request.form)
+    return render_template('build_curve.html', data=data)

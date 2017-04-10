@@ -2,11 +2,11 @@ import qbootstrapper as qb
 import re
 
 
-def parse_request(request):
+def parse_form(form):
     '''Takes Flask request object and parses to dict for bootstrapping'''
     insts = {}
     insts['insts'] = {}
-    for key, value in request.form.items():
+    for key, value in form.items():
         if key == '': continue
         num = re.sub('\D', '', key)
         try:
