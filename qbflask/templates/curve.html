@@ -2,10 +2,10 @@
 <html>
     <body>
         <table>
-            {% for key, value in data.items() %}
+            {% for date in dates %}
             <tr>
-                <th> {{ key }} </th>
-                <td> {{ value }} </td>
+                <th> {{ date }} </th>
+                <td> {{ dfs[loop.index0] }} </td>
             </tr>
             {% endfor %}
         </table>

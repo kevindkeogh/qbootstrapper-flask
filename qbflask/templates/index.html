@@ -7,20 +7,21 @@
         <p>
         <button class="addInstrumentButton">Add instrument</button>
         <p>
-        <form action="build_curve" method="POST">
+        <form action="curve" method="POST">
             <div class="input-instruments">
                 <p><b>Curve date:</b>  {{ form.curve_date }}</p>
+                <p><b>Curve type:</b>  {{ form.curve_type }}</p>
                 <table id="instruments-table">
                     <tr>
                         <th>Instrument Type</th>
-                        <th>Expiry</th>
+                        <th>Maturity</th>
                         <th>Rate</th>
                         <th></th>
                     </tr>
                     {% for inst in form.instruments %}
                     <tr id="inst-{{loop.index0}}">
                         <td>{{ inst.instrument_type }}</td>
-                        <td>{{ inst.expiry }}</td>
+                        <td>{{ inst.maturity }}</td>
                         <td>{{ inst.rate }}</td>
                         <td><button type="button" id="inst-{{loop.index0}}-remove" class="removeInstrumentButton">-</button></td>
                     </tr>
