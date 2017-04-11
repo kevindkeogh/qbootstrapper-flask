@@ -2,7 +2,7 @@
 
 from datetime import datetime as dt
 from flask import request, render_template, jsonify
-import numpy as np
+from numpy import exp
 from qbflask import app
 from qbflask.forms import InstrumentList
 from qbflask.bootstrapper import build_curve
@@ -18,5 +18,5 @@ def display_curve():
     dates = []
     for date in curve.curve['maturity']:
         dates.append(dt.strftime(date.astype(object), '%Y-%m-%d'))
-    dfs = np.exp(curve.curve['discount_factor']).tolist()
+    dfs = exp(curve.curve['discount_factor']).tolist()
     return jsonify(dates=dates, dfs=dfs)

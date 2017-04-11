@@ -23,10 +23,10 @@
 	float: right;
 }
 
-.date td {
+td.date {
 	text-align: left;
 }
 
-.discount-factor td {
+td.discount-factor {
 	text-align: right;
 }

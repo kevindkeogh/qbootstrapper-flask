@@ -29,8 +29,10 @@ function displayDFs (results) {
 
 	var numRows = results.dates.length;
 	for (var i=0; i<numRows; i++) {
-		outputTable.append("<tr><td class=\"date\">" + results.dates[i] + "</td>"
-						   + "<td class=\"discount-factor\">" + results.dfs[i]
-						   + "</td></tr>");
+		var date = results.dates[i];
+		var df = results.dfs[i].toString().substring(0, 12);
+		outputTable.append("<tr><td class=\"date\">" + date +          "</td>"
+						 +     "<td class=\"discount-factor\">" + df + "</td>"
+						 + "</tr>");
 	};
 }
