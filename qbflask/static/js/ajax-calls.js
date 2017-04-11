@@ -10,9 +10,10 @@ $(document).ready(function () {
             url: "/curve",
             data: JSON.stringify(instsData),
             contentType: "application/json;charst=UTF-8",
-            success: function(result) {
+            success: function (result) {
                 console.log(result);
-            }});
+            }
+        });
         return false;
     });
 });
