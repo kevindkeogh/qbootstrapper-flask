@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name=description content="">
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+        <title>qBootstrapper</title>
     </head>
     <div class="wrapper">
         <p>qBootstrapper Python</p>
@@ -37,12 +38,12 @@
                     {{ form.submit }}
                     </p>
                 </div>
+            </form>
             </div>
             <div class="right-output">
                 <p>Right Side</p>
             </div>
         </div>
-    </form>
     <script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/adjust-instruments.js') }}"></script>
     <script src="{{ url_for('static', filename='js/ajax-calls.js') }}"></script>
