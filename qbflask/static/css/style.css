@@ -1,6 +1,5 @@
 .left-entry {
 	float: left;
-	width: 50%;
 	text-align: left;
 }
 
@@ -13,4 +12,13 @@
 .wrapper {
 	text-align: center;
 	float: none;
+}
+
+.add-instrument-button {
+	display: inline-block;
+	float: right;
+}
+
+.remove-instrument-button {
+	float: right;
 }

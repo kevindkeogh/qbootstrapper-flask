@@ -3,7 +3,13 @@
 import wtforms as wtf
 import wtforms.fields.html5 as wtffields
 
-INSTRUMENT_TYPES = [('OISSwap', 'OIS Swap'), ('OISCashRate', 'OIS Cash Rate')]
+INSTRUMENT_TYPES = [('OISCashRate', 'OIS Cash Rate'),
+                    ('OISSwap', 'OIS Swap'),
+                    ('LIBORCashRate', 'LIBOR Cash Rate'),
+                    ('LIBORFuture', 'LIBOR Future'),
+                    ('LIBORFRA', 'LIBORFRA'),
+                    ('LIBORSwap', 'LIBOR Swap Rate')]
+
 CURVE_TYPES = [('OIS', 'OIS'), ('LIBOR', 'LIBOR')]
 
 class Instrument(wtf.Form):

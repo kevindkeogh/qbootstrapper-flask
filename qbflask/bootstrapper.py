@@ -1,12 +1,16 @@
 #!/usr/bin/python3
+'''
+'''
 
-import datetime
+import datetime as dt
 import qbootstrapper as qb
 import re
 
+
 def build_curve(jsondata):
+    '''Main function to parse JSON object and return curve object'''
     data = parse_form(jsondata)
-    curve_date = datetime.datetime.strptime(data['curve_date'], '%Y-%m-%d')
+    curve_date = dt.datetime.strptime(data['curve_date'], '%Y-%m-%d')
     if data['curve_type'] == 'OIS':
         curve = qb.OISCurve(curve_date)
     elif data['curve_type'] == 'LIBOR':
@@ -20,12 +24,12 @@ def build_curve(jsondata):
 
 
 def parse_form(jsondata):
-    '''Takes Flask request object and parses to dict for bootstrapping'''
+    '''Takes Flask request JSON object and parses to dict for bootstrapping'''
     insts = {}
     insts['insts'] = {}
     for row in jsondata:
-        num = re.sub('\D', '', row['name'])
-        if row['value'] == '': continue
+        if row['value'] == '': continue # skip if the value is nothing
+        num = re.sub('\D', '', row['name']) # parse the string for digits
         try:
             num = int(num) # this might be a ValueError if not a number
             if num not in insts['insts']: insts['insts'][num] = {}
@@ -39,17 +43,40 @@ def parse_form(jsondata):
 def create_instruments(data, curve):
     '''Takes a dict of request information and returns a list of instruments'''
     instruments = []
-    curve_date = datetime.datetime.strptime(data['curve_date'], '%Y-%m-%d')
+    curve_date = dt.datetime.strptime(data['curve_date'], '%Y-%m-%d')
     for num, inst in data['insts'].items():
-        maturity = datetime.datetime.strptime(inst['maturity'], '%Y-%m-%d')
+        maturity = dt.datetime.strptime(inst['maturity'], '%Y-%m-%d')
         rate = float(inst['rate'])
         inst_type = inst['instrument_type']
-        if inst_type == 'OISSwap':
+        if inst_type == 'OISCashRate' or inst_type == 'LIBORCashRate':
+            length_type, length_period = get_length(curve_date, maturity)
+            instrument = qb.LIBORInstrument(curve_date, rate, length_period,
+                                            curve, length_type=length_type)
+        elif inst_type == 'OISSwap':
             instrument = qb.OISSwapInstrument(curve_date, maturity, rate, curve)
-        elif inst_type == 'OISCashRate':
-            num_days = (maturity - curve_date).days
-            instrument = qb.LIBORInstrument(curve_date, rate, num_days, curve,
-                    length_type='days')
-            # TODO Add LIBOR instruments
+        elif inst_type == 'LIBORFuture':
+            instrument = None
+            #TODO
+        elif inst_type == 'LIBORFRA':
+            instrument = None
+            #TODO
+        elif inst_type == 'LIBORSwap':
+            instrument = None
+            #TODO
         instruments.append(instrument)
-    return instruments
+    return [i for i in instruments if i is not None]
+
+
+def get_length(effective, maturity):
+    '''Heuristic for determining the proper period and length for cash insts'''
+    num_days = (maturity - effective).days
+    if (num_days > 30):
+        length_type = 'months'
+        length_period = num_days // 30
+    elif (num_days > 7):
+        length_type = 'weeks'
+        length_period = num_days // 7
+    else:
+        length_type = 'days'
+        length_period = num_days
+    return (length_type, length_period)

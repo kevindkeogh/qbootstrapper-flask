@@ -11,7 +11,7 @@ $(document).ready(function () {
             data: JSON.stringify(instsData),
             contentType: "application/json;charst=UTF-8",
             success: function (result) {
-                console.log(result);
+                console.log(result); // TODO: parse to show table of DFs
             }
         });
         return false;

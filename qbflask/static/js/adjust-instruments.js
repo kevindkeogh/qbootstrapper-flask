@@ -2,7 +2,7 @@ $(document).ready(function () {
     "use strict";
     var maxFields = 30;
     var wrapper = $(".input-instruments");
-    var addButton = $(".addInstrumentButton");
+    var addButton = $(".add-instrument-button");
 
     var index = 1;
 
@@ -20,11 +20,11 @@ $(document).ready(function () {
                 td.name = td.name.replace(/\d+/g, rowNum);
                 td.id = td.id.replace(/\d+/g, rowNum);
             });
-            $(wrapper).find("tbody:last").append(newRow);
+            lastRow.after(newRow);
         }
     });
 
-    $(wrapper).on("click", ".removeInstrumentButton", function (e) {
+    $(wrapper).on("click", ".remove-instrument-button", function (e) {
         e.preventDefault();
         $(this).parent().parent().remove();
     });
