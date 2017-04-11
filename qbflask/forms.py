@@ -15,4 +15,4 @@ class InstrumentList(wtf.Form):
     curve_date = wtffields.DateField('Curve date')
     curve_type = wtf.SelectField('Curve type', choices=CURVE_TYPES)
     instruments = wtf.FieldList(wtf.FormField(Instrument), min_entries=3)
-    submit = wtf.SubmitField()
+    submit = wtf.SubmitField(id='instruments-submit')

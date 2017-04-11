@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-from flask import request, render_template
+from datetime import datetime as dt
+from flask import request, render_template, jsonify
 import numpy as np
 from qbflask import app
 from qbflask.forms import InstrumentList
@@ -13,7 +14,9 @@ def index():
 
 @app.route('/curve', methods=['POST'])
 def display_curve():
-    curve = build_curve(request.form)
-    dates = curve.curve['maturity']
-    dfs = np.exp(curve.curve['discount_factor'])
-    return render_template('curve.html', dates=dates, dfs=dfs)
+    curve = build_curve(request.json)
+    dates = []
+    for date in curve.curve['maturity']:
+        dates.append(dt.strftime(date.astype(object), '%Y-%m-%d'))
+    dfs = np.exp(curve.curve['discount_factor']).tolist()
+    return jsonify(dates=dates, dfs=dfs)

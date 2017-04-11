@@ -1,0 +1,16 @@
+.left-entry {
+	float: left;
+	width: 50%;
+	text-align: left;
+}
+
+.right-output {
+	float: right;
+	width: 50%;
+	text-align: left;
+}
+
+.wrapper {
+	text-align: center;
+	float: none;
+}
