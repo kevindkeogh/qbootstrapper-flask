@@ -1,7 +1,6 @@
 $(document).ready(function () {
     "use strict";
     var instsForm = $("#instruments-form");
-    var submitForm = $("#instruments-submit");
 
     $(instsForm).submit(function (e) {
         e.preventDefault();
