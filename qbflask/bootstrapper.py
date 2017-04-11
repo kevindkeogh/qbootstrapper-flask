@@ -3,6 +3,7 @@
 '''
 
 import datetime as dt
+from dateutil.relativedelta import relativedelta
 import qbootstrapper as qb
 import re
 
@@ -55,14 +56,18 @@ def create_instruments(data, curve):
         elif inst_type == 'OISSwap':
             instrument = qb.OISSwapInstrument(curve_date, maturity, rate, curve)
         elif inst_type == 'LIBORFuture':
-            instrument = None
-            #TODO
+            # Futures are assumed to be all 3m
+            start_date = maturity - relativedelta(months=3)
+            price = 100 - (rate * 100)
+            instrument = qb.FuturesInstrumentByDates(start_date, maturity,
+                                                     price, curve)
         elif inst_type == 'LIBORFRA':
-            instrument = None
-            #TODO
+            # FRAs are assumed to be all 6m
+            start_date = maturity - relativedelta(months=6)
+            instrument = qb.FRAInstrumentByDates(start_date, maturity, rate,
+                                                 curve)
         elif inst_type == 'LIBORSwap':
-            instrument = None
-            #TODO
+            instrument = qb.LIBORSwapInstrument(curve_date, maturity, rate, curve)
         instruments.append(instrument)
     return [i for i in instruments if i is not None]
 

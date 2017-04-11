@@ -22,3 +22,11 @@
 .remove-instrument-button {
 	float: right;
 }
+
+.date td {
+	text-align: left;
+}
+
+.discount-factor td {
+	text-align: right;
+}

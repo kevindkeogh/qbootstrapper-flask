@@ -6,46 +6,50 @@
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
         <title>qBootstrapper</title>
     </head>
-    <div class="wrapper">
-        <p>qBootstrapper Python</p>
-        <div class="left-entry">
-            <form id="instruments-form" action="curve" method="POST">
-                <div class="input-instruments">
-                    <p><b>Curve date:</b>  {{ form.curve_date }}</p>
-                    <div class="instruments-table-wrapper">
+    <body>
+        <div class="wrapper">
+            <p>qBootstrapper Python</p>
+            <div class="left-entry">
+                <form id="instruments-form" action="curve" method="POST">
+                    <div class="input-instruments">
+                        <p><b>Curve date:</b>  {{ form.curve_date }}</p>
+                        <div class="instruments-table-wrapper">
+                            <p>
+                            <b>Curve type:</b>  {{ form.curve_type }}
+                            <button class="add-instrument-button">Add instrument</button>
+                            </p>
+                            <table id="instruments-table">
+                                <tr>
+                                    <th>Instrument Type</th>
+                                    <th>Maturity</th>
+                                    <th>Rate</th>
+                                    <th></th>
+                                </tr>
+                                {% for inst in form.instruments %}
+                                <tr id="inst-{{loop.index0}}">
+                                    <td>{{ inst.instrument_type }}</td>
+                                    <td>{{ inst.maturity }}</td>
+                                    <td>{{ inst.rate }}</td>
+                                    <td><button type="button" id="inst-{{loop.index0}}-remove" class="remove-instrument-button">-</button></td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
                         <p>
-                        <b>Curve type:</b>  {{ form.curve_type }}
-                        <button class="add-instrument-button">Add instrument</button>
+                        {{ form.submit }}
                         </p>
-                        <table id="instruments-table">
-                            <tr>
-                                <th>Instrument Type</th>
-                                <th>Maturity</th>
-                                <th>Rate</th>
-                                <th></th>
-                            </tr>
-                            {% for inst in form.instruments %}
-                            <tr id="inst-{{loop.index0}}">
-                                <td>{{ inst.instrument_type }}</td>
-                                <td>{{ inst.maturity }}</td>
-                                <td>{{ inst.rate }}</td>
-                                <td><button type="button" id="inst-{{loop.index0}}-remove" class="remove-instrument-button">-</button></td>
-                            </tr>
-                            {% endfor %}
-                        </table>
                     </div>
-                    <p>
-                    {{ form.submit }}
-                    </p>
-                </div>
-            </form>
+                </form>
             </div>
             <div class="right-output">
-                <p>Right Side</p>
+                <div class="output-discount-factors">
+                    <table id="output-table">
+                    </table>
+                </div>
             </div>
         </div>
-    <script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/adjust-instruments.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/ajax-calls.js') }}"></script>
-</body>
+        <script src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/adjust-instruments.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/ajax-calls.js') }}"></script>
+    </body>
 </html>
