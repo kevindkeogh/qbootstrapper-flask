@@ -1,6 +1,34 @@
+html {
+	height: 100%;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: #ffffff;
+	font-size: small;
+	height: 100%;
+	background: #807160;
+}
+
+.wrapper {
+	text-align: center;
+	float: none;
+	height: 100%;
+}
+
 .left-entry {
+	height: 100%;
 	float: left;
 	text-align: left;
+	margin-left: 25px;
+	background-color: #57717e;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 8px;
+}
+
+table#instruments-table {
+	text-align: center;
 }
 
 .right-output {
@@ -9,10 +37,6 @@
 	text-align: left;
 }
 
-.wrapper {
-	text-align: center;
-	float: none;
-}
 
 .add-instrument-button {
 	display: inline-block;
@@ -23,7 +47,26 @@
 	float: right;
 }
 
-td.date {
+input {
+	height: 20px;
+}
+
+input.inst-rate {
+	width: 80px;
+	text-align: right;
+	border: 0px;
+	padding: 2px;
+}
+
+input.inst-mat {
+	width: 140px;
+}
+
+select.inst-type {
+	height: 20px;
+}
+
+td.inst-mat {
 	text-align: left;
 }
 
