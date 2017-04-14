@@ -156,13 +156,17 @@ select.inst-conv {
 	display: inline-block;
 	float: left;
 	height: 100%;
-	border-radius: 8px;
-	background-color: #e8e8e8;
-	color: #000000;
-	display: inline-block;
 	margin-left: 10px;
 	min-width: 201px;
+
+	border-radius: 8px;
 	padding: 10px;
+
+	background-color: #e8e8e8;
+	color: #000000;
+
+	font-family: monospace;
+	font-size: medium;
 }
 
 .output-table {
