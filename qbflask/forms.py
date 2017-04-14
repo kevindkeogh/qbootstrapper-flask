@@ -15,10 +15,12 @@ CURVE_TYPES = [('OIS', 'OIS'), ('LIBOR', 'LIBOR')]
 class Instrument(wtf.Form):
     instrument_type = wtf.SelectField('Instrument', choices=INSTRUMENT_TYPES)
     maturity = wtffields.DateField('Maturity', '%Y-%m-%d')
-    rate = wtffields.DecimalField('Rate')
+    rate = wtf.TextField('Rate')
+    convention = wtf.SelectField('Convention', choices=[('none', '')])
 
 class InstrumentList(wtf.Form):
     curve_date = wtffields.DateField('Curve date')
     curve_type = wtf.SelectField('Curve type', choices=CURVE_TYPES)
+    currency = wtf.TextField('Currency')
     instruments = wtf.FieldList(wtf.FormField(Instrument), min_entries=3)
     submit = wtf.SubmitField(id='instruments-submit')

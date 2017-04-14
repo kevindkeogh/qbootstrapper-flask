@@ -47,7 +47,7 @@ def create_instruments(data, curve):
     curve_date = dt.datetime.strptime(data['curve_date'], '%Y-%m-%d')
     for num, inst in data['insts'].items():
         maturity = dt.datetime.strptime(inst['maturity'], '%Y-%m-%d')
-        rate = float(inst['rate'])
+        rate = float(inst['rate']) / 100
         inst_type = inst['instrument_type']
         if inst_type == 'OISCashRate' or inst_type == 'LIBORCashRate':
             length_type, length_period = get_length(curve_date, maturity)

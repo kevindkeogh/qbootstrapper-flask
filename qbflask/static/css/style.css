@@ -3,67 +3,169 @@ html {
 }
 
 body {
-	font-family: 'Open Sans', sans-serif;
-	color: #ffffff;
-	font-size: small;
 	height: 100%;
-	background: #807160;
+	background: #c5c2bd;
 }
 
 .wrapper {
-	text-align: center;
-	float: none;
+	display: inline-block;
 	height: 100%;
 }
 
+/* Title header */
+div.title-header {
+	text-align: center;
+	height: 80px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+
+	width: 70%;
+	height: 80px;
+	transform: skewX(-20deg);
+	line-height: 80px;
+	background: #BE255F;
+}
+
+p.title-header {
+	font-family: 'Slabo 27px', serif;
+	text-align: center;
+	color: white;
+	font-size: 40pt;
+
+	margin-top: 0;
+	transform: skewX(20deg);
+}
+
+.io-wrapper {
+	display: inline-block;
+	height: 100%;
+	float: none;
+}
+
+/* Left side style */
+
 .left-entry {
+	display: inline-block;
 	height: 100%;
 	float: left;
-	text-align: left;
-	margin-left: 25px;
 	background-color: #57717e;
+
+	font-family: 'Open Sans', sans-serif;
+	color: #ffffff;
+	font-size: small;
+	text-align: left;
+
+	margin-left: 25px;
 	padding-left: 10px;
 	padding-right: 10px;
 	border-radius: 8px;
+}
+
+.instruments-table-wrapper {
+	display: inline-block;
+}
+
+button {
+	background-color: #ffffff;
+	border: #dcdcdc;
+	color: #666666;
+	font-weight: bold;
+	padding: 6px 24px;
+}
+
+select {
+	background: #ffffff;
+	height: 23px;
+
+	border-radius: 4px;
+	padding: 2px;
+	border: 0px;
+}
+
+input {
+	background: #ffffff;
+	height: 20px;
+
+	border-radius: 4px;
+	padding: 2px;
+	border: 0px;
+}
+
+input#curve_date {
+	width: 130px;
+	padding-left: 10px;
+}
+
+input#currency {
+	width: 62px;
+	padding-left: 6px;
+	margin-left: 10px;
+}
+
+.add-instrument-button {
+	display: inline-block;
+	float: right;
+	margin-right: 4px;
+
+	padding: 6px 18.64px;
 }
 
 table#instruments-table {
 	text-align: center;
 }
 
-.right-output {
-	float: right;
-	width: 50%;
-	text-align: left;
+span.inst-rate {
+	position: relative;
+	color: black;
 }
 
-
-.add-instrument-button {
-	display: inline-block;
-	float: right;
-}
-
-.remove-instrument-button {
-	float: right;
-}
-
-input {
-	height: 20px;
+span.inst-rate:before {
+	position: absolute;
+	top: 0;
+	content: "%";
+	right: 7px;
 }
 
 input.inst-rate {
 	width: 80px;
 	text-align: right;
-	border: 0px;
-	padding: 2px;
+	padding-right: 20px;
 }
 
 input.inst-mat {
-	width: 140px;
+	width: 130px;
+	padding-left: 10px;
 }
 
-select.inst-type {
-	height: 20px;
+select.inst-conv {
+	width: 120px;
+}
+
+.remove-instrument-button {
+	float: right;
+	padding: 6px;
+
+}
+
+/* Right side style */
+
+.right-output {
+	display: inline-block;
+	float: left;
+	height: 100%;
+	border-radius: 8px;
+	background-color: #e8e8e8;
+	color: #000000;
+	display: inline-block;
+	margin-left: 10px;
+	min-width: 201px;
+	padding: 10px;
+}
+
+.output-table {
+	margin: auto;
+	margin-top: 10px;
 }
 
 td.inst-mat {
