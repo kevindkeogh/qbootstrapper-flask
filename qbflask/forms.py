@@ -7,7 +7,7 @@ INSTRUMENT_TYPES = [('OISCashRate', 'OIS Cash Rate'),
                     ('OISSwap', 'OIS Swap'),
                     ('LIBORCashRate', 'LIBOR Cash Rate'),
                     ('LIBORFuture', 'LIBOR Future'),
-                    ('LIBORFRA', 'LIBORFRA'),
+                    ('LIBORFRA', 'LIBOR FRA'),
                     ('LIBORSwap', 'LIBOR Swap Rate')]
 
 CURVE_TYPES = [('OIS', 'OIS'), ('LIBOR', 'LIBOR')]

@@ -1,10 +1,14 @@
 html {
 	height: 100%;
+	display: table;
+	margin: auto;
+
 }
 
 body {
 	height: 100%;
 	background: #c5c2bd;
+	vertical-align: middle;
 }
 
 .wrapper {
@@ -56,8 +60,7 @@ p.title-header {
 	text-align: left;
 
 	margin-left: 25px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 10px;
 	border-radius: 8px;
 }
 
