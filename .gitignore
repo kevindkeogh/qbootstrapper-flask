@@ -88,5 +88,6 @@ qb/
 
 # Rope project settings
 .ropeproject
+
 # Vim stuff
 *.swp
