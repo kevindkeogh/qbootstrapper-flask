@@ -13,8 +13,8 @@ $(document).ready(function () {
         newRow.children().each(function () {
             var td = this.children[0];
             if (td.tagName.toLowerCase() === "span") {
-                var td = td.children[0];
-            };
+                td = td.children[0];
+            }
             td.name = td.name.replace(/\d+/g, rowNum);
             td.id = td.id.replace(/\d+/g, rowNum);
         });

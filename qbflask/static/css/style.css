@@ -16,12 +16,11 @@ body {
 div.title-header {
 	text-align: center;
 	height: 80px;
+	width: 70%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 10px;
 
-	width: 70%;
-	height: 80px;
 	transform: skewX(-20deg);
 	line-height: 80px;
 	background: #BE255F;
