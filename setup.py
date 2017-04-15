@@ -11,6 +11,7 @@ setup(
         install_requires=[
             'flask',
             'qbootstrapper',
+            'flask-wtf',
         ],
         version=VERSION,
         license=LICENSE,

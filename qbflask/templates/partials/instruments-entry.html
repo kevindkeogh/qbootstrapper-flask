@@ -1,34 +1,36 @@
 <form id="instruments-form" action="curve" method="POST">
-	<div class="input-instruments">
-		<div class="instruments-table-wrapper">
-			<p>Curve date:  {{ form.curve_date }}</p>
-			<p>Curve type:  {{ form.curve_type }}
-			<button class="add-convention-button">Add Convention</button>
-			</p>
-			<p>Currency: {{ form.currency }}
-			<button class="add-instrument-button">Add Instrument</button>
-			</p>
-			<table id="instruments-table">
-				<tr>
-					<th>Instrument Type</th>
-					<th>Maturity</th>
-					<th>Rate</th>
-					<th>Convention</th>
-					<th></th>
-				</tr>
-				{% for inst in form.instruments %}
-				<tr id="inst-{{loop.index0}}">
-					<td>{{ inst.instrument_type(class="inst-type") }}</td>
-					<td>{{ inst.maturity(class="inst-mat") }}</td>
-					<td><span class="inst-rate">{{ inst.rate(class="inst-rate", placeholder="0.00") }}</span></td>
-					<td>{{ inst.convention(class="inst-conv") }}</td>
-					<td><button type="button" id="inst-{{loop.index0}}-remove" class="remove-instrument-button">Remove</button></td>
-				</tr>
-				{% endfor %}
-			</table>
-		</div>
-		<p>
-		{{ form.submit }}
-		</p>
-	</div>
+    <input type="hidden" id="csrf-token" value="{{ csrf_token() }}"/>
+    <div class="input-instruments">
+        <div class="instruments-table-wrapper">
+            <p>Curve date:  {{ form.curve_date }}</p>
+            <p>Curve type:  {{ form.curve_type }}
+            <button class="add-convention-button">Add Convention</button>
+            </p>
+            <p>Currency: {{ form.currency }}
+            <button class="add-instrument-button">Add Instrument</button>
+            </p>
+            <table id="instruments-table">
+                <tr>
+                    <th>Instrument Type</th>
+                    <th>Maturity</th>
+                    <th>Rate</th>
+                    <th>Convention</th>
+                    <th></th>
+                </tr>
+                {% for inst in form.instruments %}
+                <tr id="inst-{{loop.index0}}">
+                    <td>{{ inst.instrument_type(class="inst-type") }}</td>
+                    <td>{{ inst.maturity(class="inst-mat") }}</td>
+                    <td><span class="inst-rate">{{ inst.rate(class="inst-rate", placeholder="0.00") }}</span></td>
+                    <td>{{ inst.convention(class="inst-conv") }}</td>
+                    <td><button type="button" id="inst-{{loop.index0}}-remove" class="remove-instrument-button">Remove</button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <p>
+        {{ form.submit }}
+        </p>
+    </div>
+</script>
 </form>

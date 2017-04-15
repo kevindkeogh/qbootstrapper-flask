@@ -4,8 +4,10 @@
 
 from flask import Flask
 import wtforms as wtf
+from flask_wtf import csrf
 
 app = Flask(__name__)
+csrf.CSRFProtect().init_app(app)  # enable CSRF protection
 
 import qbflask.views
 import qbflask.forms

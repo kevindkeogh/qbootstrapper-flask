@@ -1,4 +1,4 @@
 1. add convention page and host sqlite3 kv dict to hold conventions
 2. add all documentation
-3. divide templates into header, base, and footer sections
+3. use flask_assets
 4. add qbootstrapper to pypi
