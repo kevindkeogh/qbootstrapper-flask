@@ -1,0 +1,13 @@
+{% block content %}
+<div class="wrapper">
+	{% include "partials/header.html" %}
+	<div class="io-wrapper">
+		<div class="left-entry">
+			{% include "partials/instruments-entry.html" %}
+		</div>
+		<div class="right-output">
+			{% include "partials/discount-factors-output.html" %}
+		</div>
+	</div>
+</div>
+{% endblock content %}
