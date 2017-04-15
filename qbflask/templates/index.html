@@ -13,16 +13,18 @@
     </head>
     <body>
         <div class="wrapper">
-            <div class="title-header"><p class="title-header">q{b&#xA699;t}strapper</p></div>
+            <div class="title-header"><p class="title-header">q{boot}strapper</p></div>
             <div class="io-wrapper">
                 <div class="left-entry">
                     <form id="instruments-form" action="curve" method="POST">
                         <div class="input-instruments">
                             <div class="instruments-table-wrapper">
                                 <p>Curve date:  {{ form.curve_date }}</p>
-                                <p>Curve type:  {{ form.curve_type }}</p>
+                                <p>Curve type:  {{ form.curve_type }}
+                                <button class="add-convention-button">Add Convention</button>
+                                </p>
                                 <p>Currency: {{ form.currency }}
-                                <button class="add-instrument-button">Add</button>
+                                <button class="add-instrument-button">Add Instrument</button>
                                 </p>
                                 <table id="instruments-table">
                                     <tr>

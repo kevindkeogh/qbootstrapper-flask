@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+'''
+'''
 
 from flask import Flask
 import wtforms as wtf

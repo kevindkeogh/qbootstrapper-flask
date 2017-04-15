@@ -69,10 +69,12 @@ p.title-header {
 }
 
 button {
-	background-color: #ffffff;
 	border: #dcdcdc;
-	color: #666666;
+	background-color: #ffffff;
+	color: #000000;
 	font-weight: bold;
+
+	border-radius: 3px;
 	padding: 6px 24px;
 }
 
@@ -97,6 +99,14 @@ input {
 input#curve_date {
 	width: 130px;
 	padding-left: 10px;
+}
+
+.add-convention-button {
+	display: inline-block;
+	float: right;
+	margin-right: 4px;
+
+	padding: 6px 18.64px;
 }
 
 input#currency {
@@ -148,6 +158,18 @@ select.inst-conv {
 	float: right;
 	padding: 6px;
 
+}
+
+input#instruments-submit {
+	border: #dcdcdc;
+	background-color: #ffffff;
+	color: #000000;
+	font-weight: bold;
+
+	border-radius: 3px;
+	height: 25px;
+	line-height: 25px;
+	padding: 0px 6px;
 }
 
 /* Right side style */

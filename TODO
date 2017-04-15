@@ -1,1 +1,5 @@
 1. add convention page and host sqlite3 kv dict to hold conventions
+2. add all documentation
+3. divide templates into header, base, and footer sections
+4. add qbootstrapper to pypi
+5. add validation function for data, and return error to ajax request if invalid
