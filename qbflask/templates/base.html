@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html lang="en">
-	{% block head %}
 	<head>
+	{% block head %}
 		<meta charset="UTF-8">
 		<meta name=description content="">
 		<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 		<link rel=stylesheet href="{{ url_for('static', filename='css/style.css') }}">
 		<title>q{boot}strapper</title>
-	</head>
 	{% endblock head %}
+	</head>
 	<body>
 		{% block content %}
 		{% endblock content %}
