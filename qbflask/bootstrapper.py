@@ -27,11 +27,13 @@ def parse_form(jsondata):
     insts = {}
     insts['insts'] = {}
     for row in jsondata:
-        if row['value'] == '': continue # skip if the value is nothing
-        num = re.sub('\D', '', row['name']) # parse the string for digits
+        if row['value'] == '':
+            continue  # skip if the value is nothing
+        num = re.sub('\D', '', row['name'])  # parse the string for digits
         try:
-            num = int(num) # this might be a ValueError if not a number
-            if num not in insts['insts']: insts['insts'][num] = {}
+            num = int(num)  # this might be a ValueError if not a number
+            if num not in insts['insts']:
+                insts['insts'][num] = {}
             term = row['name'].split('-')[-1]
             insts['insts'][num][term] = row['value']
         except ValueError:
@@ -84,6 +86,7 @@ def get_length(effective, maturity):
         length_period = num_days
     return (length_type, length_period)
 
+
 def validate(req):
     '''Check curve request input params to ensure they are consistent
 
@@ -106,10 +109,10 @@ def validate(req):
         return (False, 'Must have at least 3 instruments')
 
     # Check if two instruments have the same maturity
-    mats = [ i['maturity'] for i in data['insts'].values() ]
+    mats = [i['maturity'] for i in data['insts'].values()]
     if len(set(mats)) != len(mats):
         inst_nums = []
-        inst_mats= []
+        inst_mats = []
         for num, inst in data['insts'].items():
             if inst['maturity'] in inst_mats:
                 other_inst = inst_nums[inst_mats.index(inst['maturity'])]
@@ -142,7 +145,7 @@ def validate(req):
                            'Instrument {num} maturity'.format(**locals()))
         if mat < curve_date:
             before = True
-            break # exit immediately, because there's an error
+            break  # exit immediately, because there's an error
 
         # Check that the rates are numbers
         try:
@@ -153,7 +156,6 @@ def validate(req):
         except:
             return (False, 'Unexpected error in '
                            'Instrument {num} rate'.format(**locals()))
-
 
     if not cash_rate:
         return (False, 'Must have at least 1 cash instrument')

@@ -14,6 +14,7 @@ INSTRUMENT_TYPES = [('OISCashRate', 'OIS Cash Rate'),
 
 CURVE_TYPES = [('OIS', 'OIS'), ('LIBOR', 'LIBOR')]
 
+
 class Instrument(wtf.Form):
     '''
     '''
@@ -21,6 +22,7 @@ class Instrument(wtf.Form):
     maturity = wtffields.DateField('Maturity', '%Y-%m-%d')
     rate = wtf.TextField('Rate')
     convention = wtf.SelectField('Convention', choices=[('none', '')])
+
 
 class InstrumentList(wtf.Form):
     '''

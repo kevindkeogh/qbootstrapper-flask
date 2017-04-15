@@ -1,5 +1,9 @@
 from setuptools import setup
 
+VERSION = 0.01
+LICENSE = 'MIT'
+
+
 setup(
         name='qbflask',
         packages=['qbflask'],
@@ -8,5 +12,6 @@ setup(
             'flask',
             'qbootstrapper',
         ],
+        version=VERSION,
+        license=LICENSE,
      )
-
