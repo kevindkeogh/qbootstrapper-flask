@@ -19,6 +19,13 @@ function displayDFs(results) {
     }
 }
 
+function displayBootstrapError(text) {
+    "use strict";
+    var outputTable = $("#output-table");
+    $(outputTable).empty();
+    outputTable.append("<p class=\"ajax-error\">" + text + "</p>");
+}
+
 $(document).ready(function () {
     "use strict";
     var instsForm = $("#instruments-form");
@@ -33,6 +40,10 @@ $(document).ready(function () {
             contentType: "application/json;charst=UTF-8",
             success: function (result) {
                 displayDFs(result);
+            },
+            error: function (errObj) {
+                var errMessage = JSON.parse(errObj.responseText);
+                displayBootstrapError(errMessage.message);
             }
         });
         return false;
