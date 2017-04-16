@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
 from datetime import datetime as dt
-from flask import request, render_template, jsonify
+from flask import request, render_template, jsonify, g
 from numpy import exp
 from qbflask import app
 from qbflask.forms import InstrumentList
 from qbflask.bootstrapper import build_curve, validate
+from qbflask.models import get_db
 
 
 @app.route('/', methods=['GET'])

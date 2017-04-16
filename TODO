@@ -2,8 +2,9 @@
 	a. create the database, ensure that the CONVENTIONS table exists
 	b. get all the convention names at request initiation
 	c. parse to dict
-	d. send the whole dict to the application as JSON -- should be a
-		nested dict of currency -> instrument type -> conventions
+	d. send the whole dict to the application as JSON, in an ajax request,
+		-- should be a nested dict of
+		currency -> instrument type -> conventions
 	e. write jquery function to watch for changes in the currency and
 		inst-type inputs, and update the convention input selects
 		on changes

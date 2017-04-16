@@ -91,3 +91,6 @@ qb/
 
 # Vim stuff
 *.swp
+
+# database
+*.db

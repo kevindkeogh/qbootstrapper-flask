@@ -12,6 +12,7 @@ from qbflask.views import *
 
 
 app.config.update(dict(
+    DATABASE='qbflask.db',
     DEBUG=True,
     SECRET_KEY='secret',
     USERNAME='admin',
