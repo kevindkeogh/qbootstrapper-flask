@@ -1,4 +1,18 @@
 1. add convention page and host sqlite3 kv dict to hold conventions
+	a. create the database, ensure that the CONVENTIONS table exists
+	b. get all the convention names at request initiation
+	c. parse to dict
+	d. send the whole dict to the application as JSON -- should be a
+		nested dict of currency -> instrument type -> conventions
+	e. write jquery function to watch for changes in the currency and
+		inst-type inputs, and update the convention input selects
+		on changes
+	f. send string of convention name back when curve is submitted, at
+		which point the curve builder can request the dict of
+		conventions (note that the conventions should be stored as a
+		json.dumps() text field in the db and just parsed to a dict).
+		Note that the keys of the json should match the qb inst class
+		attributes, so I can do **expansion.
 2. add all documentation
 3. use flask_assets
 4. add qbootstrapper to pypi
