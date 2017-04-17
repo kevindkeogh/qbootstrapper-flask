@@ -14,6 +14,8 @@
 		json.dumps() text field in the db and just parsed to a dict).
 		Note that the keys of the json should match the qb inst class
 		attributes, so I can do **expansion.
+	g. all the options should be stored in the original page, then hidden
+		depending on the instrument selected
 2. add all documentation
 3. use flask_assets
 4. add qbootstrapper to pypi
