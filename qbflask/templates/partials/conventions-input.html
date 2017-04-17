@@ -1,0 +1,13 @@
+<div class="wrapper">
+    {% include "partials/header.html" %}
+    <form id="conventions-display" action="conventions" method="POST">
+        <input type="hidden" id="csrf-token" value="{{ csrf_token() }}"/>
+        <div class="input-conventions">
+            <p>Name: {{ form.name }}</p>
+            <p>Currency: {{ form.currency }}</p>
+            <p>Type: {{ form.instrument_type }}</p>
+            <table id="conventions-table">
+            </table>
+        </div>
+    </form>
+</div>

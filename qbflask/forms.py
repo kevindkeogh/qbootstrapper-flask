@@ -32,3 +32,9 @@ class InstrumentList(wtf.Form):
     currency = wtf.TextField('Currency')
     instruments = wtf.FieldList(wtf.FormField(Instrument), min_entries=3)
     submit = wtf.SubmitField(id='instruments-submit')
+
+
+class Convention(wtf.Form):
+    name = wtf.TextField('Name')
+    currency = wtf.TextField('Currency')
+    instrument_type = wtf.SelectField('Instrument Type', choices=INSTRUMENT_TYPES)
