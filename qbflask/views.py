@@ -44,21 +44,27 @@ def curve_conventions():
         form = Convention()
         return render_template('conventions.html', form=form)
     elif request.method == 'POST':
-        # Needs to be updated. Right now it only returns the conventions in
-        # the db, it should be able to accept new conventions and add them
-        db = get_db()
-        cur = db.cursor()
-        query = 'SELECT name, currency, instrument, convention FROM CONVENTIONS'
-        cur.execute(query)
-        conventions = {}
-        for row in cur:
-            # Note that this creates a dict of convention.currency.name = JSON
-            if row['currency'] not in conventions:
-                conventions[row['currency']] = {}
-            if row['instrument'] not in conventions[row['currency']]:
-                conventions[row['currency']][row['instrument']] = {}
-            conventions[row['currency']][row['instrument']][row['name']] = row['convention']
-        return jsonify(conventions)
+        # Add conventions
+        pass
+
+
+@app.route('/fetch+conventions', methods=['GET'])
+def fetch_conventions():
+    '''
+    '''
+    db = get_db()
+    cur = db.cursor()
+    query = 'SELECT name, currency, instrument, convention FROM CONVENTIONS'
+    cur.execute(query)
+    conventions = {}
+    for row in cur:
+        # Note that this creates a dict of convention.currency.name = JSON
+        if row['currency'] not in conventions:
+            conventions[row['currency']] = {}
+        if row['instrument'] not in conventions[row['currency']]:
+            conventions[row['currency']][row['instrument']] = {}
+        conventions[row['currency']][row['instrument']][row['name']] = row['convention']
+    return jsonify(conventions)
 
 
 @app.errorhandler(406)

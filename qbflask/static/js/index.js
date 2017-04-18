@@ -64,7 +64,7 @@ $(document).ready(function () {
             type: "POST",
             url: "/curve",
             data: JSON.stringify(instsData),
-            contentType: "application/json;charst=UTF-8",
+            contentType: "application/json;charset=UTF-8",
             success: function (result) {
                 displayDFs(result);
             },

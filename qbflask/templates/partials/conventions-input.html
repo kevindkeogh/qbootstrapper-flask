@@ -5,25 +5,63 @@
         <div class="input-conventions">
             <table id="rate-conventions-table">
                 <tr>
-                    <td>Name:</td><td>{{ form.conv_name }}</td>
+                    <td>Name:</td>
+                    <td>{{ form.conv_name }}</td>
                 </tr>
                 <tr>
-                    <td>Currency:</td><td>{{ form.conv_currency }}</td>
+                    <td>Currency:</td>
+                    <td>{{ form.conv_currency }}</td>
                 </tr>
                 <tr>
-                    <td>Type:</td><td>{{ form.conv_instrument_type }}</td>
+                    <td>Type:</td>
+                    <td>{{ form.conv_instrument_type }}</td>
                 </tr>
                 <tr>
-                    <td>Rate Basis:</td><td>{{ form.rate_basis }}</td>
+                    <td>Rate Basis:</td>
+                    <td>{{ form.rate_basis }}</td>
                 </tr>
                 <tr>
-                    <td>Instrument/Rate Length:</td><td>{{ form.inst_length }}</td>
+                    <td>Instrument/Rate Length:</td>
+                    <td>{{ form.inst_length }}</td>
                 </tr>
                 <tr>
-                    <td>Instrument/Rate Length Type:</td><td>{{ form.inst_length_type }}</td>
+                    <td>Instrument/Rate Length Type:</td>
+                    <td>{{ form.inst_length_type }}</td>
                 </tr>
             </table>
             <table id="swap-conventions-table">
+                <thead>
+                    <th></th>
+                    <th>Fixed Leg</th>
+                    <th>Floating Leg</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Accrual Basis: </td>
+                        <td>{{ form.fixed_basis }}</td>
+                        <td>{{ form.float_basis }}</td>
+                    </tr>
+                    <tr>
+                        <td>Frequency: </td>
+                        <td>{{ form.fixed_freq }}</td>
+                        <td>{{ form.float_freq }}</td>
+                    </tr>
+                    <tr>
+                        <td>Frequency Length: </td>
+                        <td>{{ form.fixed_freq_length }}</td>
+                        <td>{{ form.float_freq_length }}</td>
+                    </tr>
+                    <tr>
+                        <td>Period Adjustment: </td>
+                        <td>{{ form.fixed_period_adj }}</td>
+                        <td>{{ form.float_period_adj }}</td>
+                    </tr>
+                    <tr>
+                        <td>Payment Adjustment: </td>
+                        <td>{{ form.fixed_payment_adj }}</td>
+                        <td>{{ form.float_payment_adj }}</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </form>
