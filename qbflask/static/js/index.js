@@ -155,7 +155,7 @@ $(document).ready(function () {
             var opts = conventions[ccy][instType];
             convSelect.empty();
             if (opts !== undefined) {
-                opts.forEach(function(opt) {
+                opts.forEach(function (opt) {
                     convSelect.append($("<option></option>")
                         .attr("value", opt)
                         .text(opt));
