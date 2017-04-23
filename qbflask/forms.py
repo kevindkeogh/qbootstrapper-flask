@@ -47,6 +47,7 @@ class Convention(wtf.Form):
     conv_name = wtf.TextField('Name')
     conv_currency = wtf.TextField('Currency')
     conv_instrument_type = wtf.SelectField('Instrument Type', choices=INSTRUMENT_TYPES)
+    submit = wtf.SubmitField()
     # Cash conventions
     rate_basis = wtf.SelectField('Rate Basis', choices=BASIS_TYPES)
     inst_length = wtf.TextField('Length')

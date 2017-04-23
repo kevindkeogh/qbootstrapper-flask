@@ -14,6 +14,7 @@ $(document).ready(function () {
 		newRow.children().each(function () {
 			var td = this.children[0];
 			if (td.tagName.toLowerCase() === "span") {
+				// catch the case where the input is covered by a span
 				td = td.children[0];
 			}
 			td.name = td.name.replace(/\d+/g, rowNum);
@@ -23,9 +24,13 @@ $(document).ready(function () {
 	});
 
 	$(wrapper).on("click", ".remove-instrument-button", function (e) {
-	/* TODO: Prevent deleting first row */
+		/* Button to delete the row, but avoid deleting the row if its
+		 * the only one */
 		e.preventDefault();
-		$(this).parent().parent().remove();
+		var numRows = $(this).parent().parent().parent().children().length;
+		if (numRows > 2) { // not sure why this is 2, not 1...
+			$(this).parent().parent().remove();
+		}
 	});
 });
 

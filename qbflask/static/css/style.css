@@ -207,3 +207,9 @@ td.inst-mat {
 td.discount-factor {
 	text-align: right;
 }
+
+/* Conventions style */
+
+#swap-conventions-table {
+	display: none;
+}
