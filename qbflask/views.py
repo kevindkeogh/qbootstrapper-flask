@@ -4,8 +4,9 @@ from datetime import datetime as dt
 from flask import request, render_template, jsonify
 from numpy import exp
 from qbflask import app
+from qbflask.bootstrapper import build_curve, insts_validate
+from qbflask.conventions import add_convention, get_convs
 from qbflask.forms import InstrumentList, Convention
-from qbflask.bootstrapper import build_curve, validate, parse_form
 from qbflask.models import get_db
 
 
@@ -21,7 +22,7 @@ def index():
 def display_curve():
     '''
     '''
-    valid, reason = validate(request)
+    valid, reason = insts_validate(request)
     if not valid:
         return unacceptable_input(reason)
     curve = build_curve(request.json)
@@ -44,28 +45,19 @@ def curve_conventions():
         form = Convention()
         return render_template('conventions.html', form=form)
     elif request.method == 'POST':
-        print("curve_conventions: ", request.json)
-        data = parse_form(request.json)
-        return jsonify(data)
+        success = add_convention(request.json)
+        if success:
+            return ('', 204)
+        else:
+            return ('', 400)
 
 
 @app.route('/fetch+conventions', methods=['GET'])
 def fetch_conventions():
     '''
     '''
-    db = get_db()
-    cur = db.cursor()
-    query = 'SELECT name, currency, instrument, convention FROM CONVENTIONS'
-    cur.execute(query)
-    conventions = {}
-    for row in cur:
-        # Note that this creates a dict of convention.currency.name = JSON
-        if row['currency'] not in conventions:
-            conventions[row['currency']] = {}
-        if row['instrument'] not in conventions[row['currency']]:
-            conventions[row['currency']][row['instrument']] = {}
-        conventions[row['currency']][row['instrument']][row['name']] = row['convention']
-    return jsonify(conventions)
+    convs = get_convs()
+    return jsonify(convs)
 
 
 @app.errorhandler(406)

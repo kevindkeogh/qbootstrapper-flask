@@ -62,6 +62,7 @@ p.title-header {
 	margin-left: 25px;
 	padding: 10px;
 	border-radius: 8px;
+	min-width: 550px;
 }
 
 .instruments-table-wrapper {

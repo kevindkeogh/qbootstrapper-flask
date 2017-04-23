@@ -29,7 +29,6 @@ def close_db(error):
     '''
     if hasattr(g, 'db'):
         g.db.close()
-        print('Database closed')
 
 
 def init_db():

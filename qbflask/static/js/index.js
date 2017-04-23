@@ -1,3 +1,35 @@
+function displayDFs(results) {
+    "use strict";
+	/* Parse results of discount factor results JSON and show in table */
+    var i;
+    var date;
+    var df;
+    var outputTable = $("#output-table");
+    $(outputTable).empty(); // Remove all child elements
+    // in case this is not the first run
+    var headerRow = $("<thead><tr><th>Dates</th>" +
+            "<th>Discount Factors</th></tr></thead>");
+    $(headerRow).appendTo(outputTable);
+
+    var numRows = results.dates.length;
+    for (i=0; i<numRows; i++) {
+        date = results.dates[i];
+        df = results.dfs[i].toString().substring(0, 12);
+        outputTable.append("<tr><td class=\"date\">" + date + "</td>" +
+                "<td class=\"discount-factor\">" + df + "</td></tr>");
+    }
+}
+
+
+function displayBootstrapError(text) {
+    "use strict";
+	/* Parse error text and display in output table */
+    var outputTable = $("#output-table");
+    $(outputTable).empty();
+    outputTable.append("<p class=\"ajax-error\">" + text + "</p>");
+}
+
+
 $(document).ready(function () {
 	"use strict";
 	/* Copy last instruments row and append to last row of table */
@@ -25,7 +57,8 @@ $(document).ready(function () {
 
 	$(wrapper).on("click", ".remove-instrument-button", function (e) {
 		/* Button to delete the row, but avoid deleting the row if its
-		 * the only one */
+		 * the only one
+         */
 		e.preventDefault();
 		var numRows = $(this).parent().parent().parent().children().length;
 		if (numRows > 2) { // not sure why this is 2, not 1...
@@ -50,7 +83,8 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     "use strict";
-	/* Submit button to perform ajax request back to /curve server endpoint */
+	/* Submit button to perform ajax request back to /curve server endpoint
+     */
     var instsForm = $("#instruments-form");
     var csrfToken = $("#csrf-token")[0].value;
 
@@ -83,33 +117,53 @@ $(document).ready(function () {
 });
 
 
-function displayDFs(results) {
+$(document).ready(function () {
     "use strict";
-	/* Parse results of discount factor results JSON and show in table */
-    var i;
-    var date;
-    var df;
-    var outputTable = $("#output-table");
-    $(outputTable).empty(); // Remove all child elements
-    // in case this is not the first run
-    var headerRow = $("<thead><tr><th>Dates</th>" +
-            "<th>Discount Factors</th></tr></thead>");
-    $(headerRow).appendTo(outputTable);
+    /* Send request back to the /fetch+instruments endpoint for conventions
+     */
 
-    var numRows = results.dates.length;
-    for (i=0; i<numRows; i++) {
-        date = results.dates[i];
-        df = results.dfs[i].toString().substring(0, 12);
-        outputTable.append("<tr><td class=\"date\">" + date + "</td>" +
-                "<td class=\"discount-factor\">" + df + "</td></tr>");
-    }
-}
+    var conventions;
+    var instTypes = $(".inst-type");
 
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrfToken);
+            }
+        }
+    });
 
-function displayBootstrapError(text) {
-    "use strict";
-	/* Parse error text and display in output table */
-    var outputTable = $("#output-table");
-    $(outputTable).empty();
-    outputTable.append("<p class=\"ajax-error\">" + text + "</p>");
-}
+    $.ajax({
+        type: "GET",
+        url: "/fetch+conventions",
+        contentType: "application/json;charset=UTF-8",
+        success: function(result) {
+            conventions = result;
+            console.log(conventions);
+        }
+        //TODO: add error
+    });
+
+    instTypes.on("change", function(e) {
+        var convSelectId = e.target.id.substring(0, e.target.id.length - 15);
+        convSelectId = "#" + convSelectId + "convention";
+        var convSelect = $(convSelectId);
+
+        var ccy = $("#currency").val();
+        var instType = e.target.value;
+        try {
+            var opts = conventions[ccy][instType];
+            convSelect.empty();
+            opts.forEach(function(opt) {
+                convSelect.append($("<option></option>")
+                                  .attr("value", opt)
+                                  .text(opt));
+                                  });
+
+        }
+        catch (e) {
+            console.log(e);
+        }
+    });
+});
+

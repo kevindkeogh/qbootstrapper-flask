@@ -8,9 +8,9 @@ import qbootstrapper as qb
 import re
 
 
-def build_curve(jsondata):
+def build_curve(raw_data):
     '''Main function to parse JSON object and return curve object'''
-    data = parse_form(jsondata)
+    data = parse_rates_form(raw_data)
     curve_date = dt.datetime.strptime(data['curve_date'], '%Y-%m-%d')
     if data['curve_type'] == 'OIS':
         curve = qb.OISCurve(curve_date)
@@ -22,11 +22,11 @@ def build_curve(jsondata):
     return curve
 
 
-def parse_form(jsondata):
+def parse_rates_form(raw_data):
     '''Takes Flask request JSON object and parses to dict for bootstrapping'''
     insts = {}
     insts['insts'] = {}
-    for row in jsondata:
+    for row in raw_data:
         if row['value'] == '':
             continue  # skip if the value is nothing
         num = re.sub('\D', '', row['name'])  # parse the string for digits
@@ -87,7 +87,7 @@ def get_length(effective, maturity):
     return (length_type, length_period)
 
 
-def validate(req):
+def insts_validate(req):
     '''Check curve request input params to ensure they are consistent
 
     Note that the response is a 2 element tuple. The first element is a Boolean
