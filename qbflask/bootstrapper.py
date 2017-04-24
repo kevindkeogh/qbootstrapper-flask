@@ -5,6 +5,7 @@
 import datetime as dt
 from dateutil.relativedelta import relativedelta
 import qbootstrapper as qb
+import qbflask.conventions as conventions
 import re
 
 
@@ -49,12 +50,29 @@ def create_instruments(data, curve):
         maturity = dt.datetime.strptime(inst['maturity'], '%Y-%m-%d')
         rate = float(inst['rate']) / 100
         inst_type = inst['instrument_type']
+        conv = conventions.get_convention(inst['convention'], data['currency'])
         if inst_type == 'OISCashRate' or inst_type == 'LIBORCashRate':
             length_type, length_period = get_length(curve_date, maturity)
             instrument = qb.LIBORInstrument(curve_date, rate, length_period,
                                             curve, length_type=length_type)
         elif inst_type == 'OISSwap':
-            instrument = qb.OISSwapInstrument(curve_date, maturity, rate, curve)
+            instrument = qb.OISSwapInstrument(curve_date, maturity, rate, curve,
+                    rate_basis=conv['rate_basis'],
+                    rate_period=int(conv['inst_length']),
+                    rate_period_length=conv['inst_length_type'],
+
+                    fixed_basis=conv['fixed_basis'],
+                    fixed_length=int(conv['fixed_freq']),
+                    fixed_period_length=conv['fixed_freq_length'],
+                    fixed_period_adjustment=conv['fixed_period_adj'],
+                    fixed_payment_adjustment=conv['fixed_payment_adj'],
+
+                    float_basis=conv['float_basis'],
+                    float_length=int(conv['float_freq']),
+                    float_period_length=conv['float_freq_length'],
+                    float_period_adjustment=conv['float_period_adj'],
+                    float_payment_adjustment=conv['float_payment_adj']
+                    )
         elif inst_type == 'LIBORFuture':
             # Futures are assumed to be all 3m
             start_date = maturity - relativedelta(months=3)
@@ -94,7 +112,7 @@ def insts_validate(req):
     for validity (true if valid, false is invalid) and the second is the first
     error failed or None if no error'''
     # Check the curve date works
-    data = parse_form(req.json)
+    data = parse_rates_form(req.json)
     try:
         curve_date = dt.datetime.strptime(data['curve_date'], '%Y-%m-%d')
     except KeyError:

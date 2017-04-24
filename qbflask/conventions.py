@@ -37,7 +37,7 @@ def parse_convs_form(raw_data):
     return convs
 
 
-def get_convs():
+def get_conventions_list():
     '''Returns nested dict of all conventions
         { Currency : { Instrument_type : [Name] } }
     '''
@@ -61,3 +61,15 @@ def convs_validate(conv):
     '''
     '''
     pass
+
+
+def get_convention(name, currency):
+    '''
+    '''
+    db = models.get_db()
+    cur = db.cursor()
+    query = 'SELECT convention FROM conventions WHERE (name=? AND currency=?)'
+    cur.execute(query, (name, currency))
+    conv = cur.fetchone()[0]
+    conv = json.loads(conv)
+    return conv

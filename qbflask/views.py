@@ -5,7 +5,7 @@ from flask import request, render_template, jsonify
 from numpy import exp
 from qbflask import app
 from qbflask.bootstrapper import build_curve, insts_validate
-from qbflask.conventions import add_convention, get_convs
+from qbflask.conventions import add_convention, get_conventions_list 
 from qbflask.forms import InstrumentList, Convention
 from qbflask.models import get_db
 
@@ -56,7 +56,7 @@ def curve_conventions():
 def fetch_conventions():
     '''
     '''
-    convs = get_convs()
+    convs = get_conventions_list()
     return jsonify(convs)
 
 
