@@ -89,7 +89,7 @@ $(document).ready(function () {
     var csrfToken = $("#csrf-token").val();
 
     $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
+        beforeSend: function (xhr, settings) {
             if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
                 xhr.setRequestHeader("X-CSRFToken", csrfToken);
             }
@@ -145,7 +145,8 @@ $(document).ready(function () {
     });
 
     instTypes.on("change", function (e) {
-        var convSelectId = e.target.id.substring(0, e.target.id.length - 15);
+        var convSelectId = e.target.id.substring(0, e.target.id.length -
+                "instrument_type".length);
         convSelectId = "#" + convSelectId + "convention";
         var convSelect = $(convSelectId);
 
@@ -154,11 +155,11 @@ $(document).ready(function () {
         try {
             var opts = conventions[ccy][instType];
             convSelect.empty();
-            if (opts !== undefined) {
+            if (typeof opts !== "undefined") {
                 opts.forEach(function (opt) {
                     convSelect.append($("<option></option>")
-                        .attr("value", opt)
-                        .text(opt));
+                            .attr("value", opt)
+                            .text(opt));
                 });
             }
         } catch (err) {
