@@ -5,7 +5,7 @@ from flask import request, render_template, jsonify
 from numpy import exp
 from qbflask import app
 from qbflask.bootstrapper import build_curve, insts_validate
-from qbflask.conventions import add_convention, get_conventions_list 
+from qbflask.conventions import add_convention, get_conventions_list
 from qbflask.forms import InstrumentList, Convention
 from qbflask.models import get_db
 
@@ -45,11 +45,11 @@ def curve_conventions():
         form = Convention()
         return render_template('conventions.html', form=form)
     elif request.method == 'POST':
-        success = add_convention(request.json)
+        success, status = add_convention(request.json)
         if success:
-            return ('', 204)
+            return (status, 200)
         else:
-            return ('', 400)
+            return (status, 400)
 
 
 @app.route('/fetch+conventions', methods=['GET'])

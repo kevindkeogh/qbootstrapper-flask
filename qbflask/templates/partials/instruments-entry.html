@@ -2,13 +2,19 @@
     <input type="hidden" id="csrf-token" value="{{ csrf_token() }}"/>
     <div class="input-instruments">
         <div class="instruments-table-wrapper">
-            <p>Curve date:  {{ form.curve_date }}</p>
-            <p>Curve type:  {{ form.curve_type }}
-            <button class="add-convention-button">Add Convention</button>
-            </p>
-            <p>Currency: {{ form.currency }}
-            <button class="add-instrument-button">Add Instrument</button>
-            </p>
+            <table class="general-conventions">
+                <tr>
+                    <td>Curve date:  </td><td>{{ form.curve_date }}</td>
+                </tr>
+                <tr>
+                    <td>Curve type:  </td><td>{{ form.curve_type }}</td>
+                    <td><button class="add-convention-button">Add Convention</button></td>
+                </tr>
+                <tr>
+                    <td>Currency:  </td><td>{{ form.currency }}</td>
+                    <td><button class="add-instrument-button">Add Instrument</button></td>
+                </tr>
+            </table>
             <table id="instruments-table">
                 <tr>
                     <th>Instrument Type</th>

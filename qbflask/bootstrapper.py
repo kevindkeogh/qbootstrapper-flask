@@ -58,8 +58,8 @@ def create_instruments(data, curve):
         elif inst_type == 'OISSwap':
             instrument = qb.OISSwapInstrument(curve_date, maturity, rate, curve,
                     rate_basis=conv['rate_basis'],
-                    rate_period=int(conv['inst_length']),
-                    rate_period_length=conv['inst_length_type'],
+                    rate_period=int(conv['rate_length']),
+                    rate_period_length=conv['rate_length_type'],
 
                     fixed_basis=conv['fixed_basis'],
                     fixed_length=int(conv['fixed_freq']),

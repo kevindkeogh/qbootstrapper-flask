@@ -14,7 +14,7 @@ def add_convention(raw_data):
     try:
         data = parse_convs_form(raw_data)
         name = data['conv_name']
-        ccy = data['conv_currency']
+        ccy = data['currency']
         inst = data['conv_instrument_type']
         conv = json.dumps(data)
         db = models.get_db()
@@ -23,10 +23,9 @@ def add_convention(raw_data):
                  'convention) VALUES(?, ?, ?, ?)')
         cur.execute(query, (name, ccy, inst, conv))
         db.commit()
-        return True
+        return (True, '{name} convention successfully added'.format(**locals()))
     except:
-        # TODO: return exception
-        return False
+        return (False, 'An error occurred: {name} not added'.format(**locals()))
 
 
 def parse_convs_form(raw_data):

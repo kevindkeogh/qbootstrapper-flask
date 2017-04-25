@@ -45,14 +45,13 @@ class InstrumentList(wtf.Form):
 
 class Convention(wtf.Form):
     conv_name = wtf.TextField('Name')
-    conv_currency = wtf.TextField('Currency')
+    currency = wtf.TextField('Currency')
     conv_instrument_type = wtf.SelectField('Instrument Type', choices=INSTRUMENT_TYPES)
     submit = wtf.SubmitField()
     # Cash conventions
     rate_basis = wtf.SelectField('Rate Basis', choices=BASIS_TYPES)
-    inst_length = wtf.TextField('Length')
-    inst_length_type = wtf.SelectField('Length Type', choices=FREQ_TYPES)
-    inst_payment_adj = wtf.SelectField('Payment Adjustment', choices=ADJ_TYPES)
+    rate_length = wtf.TextField('Length')
+    rate_length_type = wtf.SelectField('Length Type', choices=FREQ_TYPES)
     # Futures conventions - same as cash
     # FRA conventions - same as cash
     # Swap Conventions

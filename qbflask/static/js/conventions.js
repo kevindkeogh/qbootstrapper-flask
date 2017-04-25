@@ -15,7 +15,15 @@ $(document).ready(function () {
     "use strict";
 	/* Submit button to perform ajax request back to /curve server endpoint */
     var convsForm = $("#conventions-display");
-    var csrfToken = $("#csrf-token")[0].value;
+    var csrfToken = $("#csrf-token").val();
+
+    function displayConvStatus (convStatus) {
+        var statusDiv = $("#conventions-status");
+        statusDiv.empty();
+        statusDiv.append($("<p></p>").text(convStatus));
+        statusDiv.show();
+        statusDiv.fadeOut(3000);
+    };
 
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
@@ -34,10 +42,10 @@ $(document).ready(function () {
 			data: JSON.stringify(convData),
 			contentType: "application/json;charset=UTF-8",
 			success: function (result) {
-				console.log(result);
+				displayConvStatus(result);
 			},
 			error: function (err) {
-				console.log(err);
+				displayConvStatus(err.responseText);
 		    }
 		});
 		return false;
