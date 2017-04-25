@@ -111,11 +111,15 @@ input {
 	border-radius: 4px;
 	padding: 2px;
 	border: 0px;
+
+	text-indent: 5px;
 }
 
 input#curve_date {
 	width: 130px;
 	padding-left: 10px;
+
+	text-indent: 0px;
 }
 
 .add-convention-button {
@@ -167,6 +171,8 @@ input.inst-rate {
 input.inst-mat {
 	width: 130px;
 	padding-left: 10px;
+
+	text-indent: 0px;
 }
 
 select.inst-conv {

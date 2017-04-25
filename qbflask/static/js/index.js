@@ -124,7 +124,6 @@ $(document).ready(function () {
 
 	var conventions;
 	var csrfToken = $("#csrf-token").val();
-	var instTypes = $(".inst-type");
 
 	$.ajaxSetup({
 		beforeSend: function (xhr, settings) {
@@ -168,6 +167,7 @@ $(document).ready(function () {
 	}
 
 	$(".inst-type, #currency").on("change", function (e) {
+		var instTypes = $(".inst-type");
 		if (e.target.className === "inst-type") {
 			updateConventions(e.target);
 		} else if (e.target.id === "currency") {
