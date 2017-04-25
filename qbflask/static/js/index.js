@@ -16,7 +16,7 @@ function displayDFs(results) {
         date = results.dates[i];
         df = results.dfs[i].toString().substring(0, 12);
         outputTable.append("<tr><td class=\"date\">" + date + "</td>" +
-                "<td class=\"discount-factor\">" + df + "</td></tr>");
+            "<td class=\"discount-factor\">" + df + "</td></tr>");
     }
 }
 
@@ -145,8 +145,8 @@ $(document).ready(function () {
     });
 
     instTypes.on("change", function (e) {
-        var convSelectId = e.target.id.substring(0, e.target.id.length -
-                "instrument_type".length);
+        var convSelectId = e.target.id.substring(0,
+            e.target.id.length - "instrument_type".length);
         convSelectId = "#" + convSelectId + "convention";
         var convSelect = $(convSelectId);
 
@@ -155,11 +155,11 @@ $(document).ready(function () {
         try {
             var opts = conventions[ccy][instType];
             convSelect.empty();
-            if (typeof opts !== "undefined") {
+            if (opts === undefined) {
                 opts.forEach(function (opt) {
                     convSelect.append($("<option></option>")
-                            .attr("value", opt)
-                            .text(opt));
+                        .attr("value", opt)
+                        .text(opt));
                 });
             }
         } catch (err) {
