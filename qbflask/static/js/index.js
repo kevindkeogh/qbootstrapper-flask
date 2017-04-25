@@ -47,6 +47,7 @@ $(document).ready(function () {
 
         var ccy = $("#currency").val();
         var instType = el.value;
+
         if (!conventions.hasOwnProperty(ccy)) {
             // Check if currency is in conventions
             convSelect.empty();
@@ -93,7 +94,7 @@ $(document).ready(function () {
             td.id = td.id.replace(/\d+/g, rowNum);
         });
         lastRow.after(newRow);
-        updateConventions(newRow.get(0));
+        updateConventions(newRow.find(".inst-type").get(0));
     });
 
     $(wrapper).on("click", ".remove-instrument-button", function (e) {
