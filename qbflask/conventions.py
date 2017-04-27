@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-'''
+'''Functions and constants for all conventions, including adding and returning
+lists of conventions
 '''
 
 
@@ -8,8 +9,27 @@ import json
 import re
 
 
+INSTRUMENT_TYPES = [('OISCashRate', 'OIS Cash Rate'),
+                    ('OISSwap', 'OIS Swap'),
+                    ('LIBORCashRate', 'LIBOR Cash Rate'),
+                    ('LIBORFuture', 'LIBOR Future'),
+                    ('LIBORFRA', 'LIBOR FRA'),
+                    ('LIBORSwap', 'LIBOR Swap Rate')]
+
+CURVE_TYPES = [('OIS', 'OIS'), ('LIBOR', 'LIBOR')]
+
+FREQ_TYPES = [('months', 'Months'), ('weeks', 'Weeks'), ('days', 'Days')]
+
+ADJ_TYPES = [('unadjusted', 'Unadjusted'), ('following', 'Following'),
+             ('modified following', 'Modified Following'),
+             ('preceding', 'Preceding')]
+
+BASIS_TYPES = [('act360', 'Actual/360'), ('act365', 'Actual/365'),
+               ('30360', '30/360'), ('30E360', '30/360E')]
+
 def add_convention(raw_data):
-    '''
+    '''Takes a flask request JSON object, calls the parser, and adds the
+    information to the database
     '''
     try:
         data = parse_convs_form(raw_data)
@@ -63,7 +83,8 @@ def convs_validate(conv):
 
 
 def get_convention(name, currency):
-    '''
+    '''Gets a single convention from the database. Returns a python dict of
+    conventions and strings
     '''
     db = models.get_db()
     cur = db.cursor()

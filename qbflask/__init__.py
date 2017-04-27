@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''
+'''qbootstraper main application
 '''
 
 from flask import Flask

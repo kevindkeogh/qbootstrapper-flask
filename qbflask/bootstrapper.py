@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''
+'''This modules handles all the processing of information to bootstrap the curve
 '''
 
 import datetime as dt
@@ -10,7 +10,8 @@ import re
 
 
 def build_curve(raw_data):
-    '''Main function to parse JSON object and return curve object'''
+    '''Main function to parse JSON object and return curve object
+    '''
     data = parse_rates_form(raw_data)
     curve_date = dt.datetime.strptime(data['curve_date'], '%Y-%m-%d')
     if data['curve_type'] == 'OIS':
@@ -24,7 +25,8 @@ def build_curve(raw_data):
 
 
 def parse_rates_form(raw_data):
-    '''Takes Flask request JSON object and parses to dict for bootstrapping'''
+    '''Takes Flask request JSON object and parses to dict for bootstrapping
+    '''
     insts = {}
     insts['insts'] = {}
     for row in raw_data:
@@ -43,7 +45,8 @@ def parse_rates_form(raw_data):
 
 
 def create_instruments(data, curve):
-    '''Takes a dict of request information and returns a list of instruments'''
+    '''Takes a dict of request information and returns a list of instruments
+    '''
     instruments = []
     curve_date = dt.datetime.strptime(data['curve_date'], '%Y-%m-%d')
     for num, inst in data['insts'].items():
