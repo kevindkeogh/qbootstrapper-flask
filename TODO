@@ -1,4 +1,3 @@
-1. add all documentation
 2. add qbootstrapper to pypi
 3. add market data to the database in some structured schema
 4. add instrument-definition, which would be linked to a convention and an
