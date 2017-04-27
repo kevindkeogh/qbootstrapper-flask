@@ -1,3 +1,8 @@
-2. add all documentation
-3. use flask_assets
-4. add qbootstrapper to pypi
+1. add all documentation
+2. add qbootstrapper to pypi
+3. add market data to the database in some structured schema
+4. add instrument-definition, which would be linked to a convention and an
+	id, which itself would be linked to a database id. Can't do this until
+	there's some more thought about how I should put the market data
+	in the database
+5. add curve-definition, contains instrument-definitions
