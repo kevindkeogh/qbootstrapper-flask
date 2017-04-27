@@ -132,7 +132,7 @@ $(document).ready(function () {
         var instsData = $(instsForm).serializeArray();
         $.ajax({
             type: "POST",
-            url: "/curve",
+            url: "/api/v1/bootstrap",
             data: JSON.stringify(instsData),
             contentType: "application/json;charset=UTF-8",
             success: function (result) {
@@ -147,11 +147,11 @@ $(document).ready(function () {
     });
 
 
-    /* Send request back to the /fetch+instruments endpoint for conventions
+    /* Send request back to the /conventions/get endpoint for conventions
     */
     $.ajax({
         type: "GET",
-        url: "/fetch+conventions",
+        url: "/api/v1/conventions/get",
         contentType: "application/json;charset=UTF-8",
         success: function (result) {
             conventions = result;

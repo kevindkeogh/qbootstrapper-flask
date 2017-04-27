@@ -38,7 +38,7 @@ $(document).ready(function () {
         var convData = $(convsForm).serializeArray();
         $.ajax({
             type: "POST",
-            url: "/conventions",
+            url: "/api/v1/conventions/add",
             data: JSON.stringify(convData),
             contentType: "application/json;charset=UTF-8",
             success: function (result) {
