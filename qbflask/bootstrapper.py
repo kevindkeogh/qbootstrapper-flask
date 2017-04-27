@@ -54,7 +54,8 @@ def create_instruments(data, curve):
         if inst_type == 'OISCashRate' or inst_type == 'LIBORCashRate':
             length_type, length_period = get_length(curve_date, maturity)
             instrument = qb.LIBORInstrument(curve_date, rate, length_period,
-                                            curve, length_type=length_type)
+                                            curve, length_type=length_type,
+                                            basis=conv['rate_basis'])
         elif inst_type == 'OISSwap':
             instrument = qb.OISSwapInstrument(curve_date, maturity, rate, curve,
                     rate_basis=conv['rate_basis'],
@@ -74,18 +75,48 @@ def create_instruments(data, curve):
                     float_payment_adjustment=conv['float_payment_adj']
                     )
         elif inst_type == 'LIBORFuture':
-            # Futures are assumed to be all 3m
-            start_date = maturity - relativedelta(months=3)
+            rate_length = int(conv['rate_length'])
+            if conv['rate_length_type'] == 'months':
+                delta = relativedelta(months=rate_length)
+            elif conv['rate_length_type'] == 'weeks':
+                delta = relativedelta(weeks=rate_length)
+            elif conv['rate_length_type'] == 'days':
+                delta = relativedelta(days=rate_length)
+            start_date = maturity - delta
             price = 100 - (rate * 100)
             instrument = qb.FuturesInstrumentByDates(start_date, maturity,
-                                                     price, curve)
+                                                     price, curve,
+                                                     basis=conv['rate_basis'])
         elif inst_type == 'LIBORFRA':
-            # FRAs are assumed to be all 6m
-            start_date = maturity - relativedelta(months=6)
+            rate_length = int(conv['rate_length'])
+            if conv['rate_length_type'] == 'months':
+                delta = relativedelta(months=rate_length)
+            elif conv['rate_length_type'] == 'weeks':
+                delta = relativedelta(weeks=rate_length)
+            elif conv['rate_length_type'] == 'days':
+                delta = relativedelta(days=rate_length)
+            start_date = maturity - delta
             instrument = qb.FRAInstrumentByDates(start_date, maturity, rate,
-                                                 curve)
+                                                 curve,
+                                                 basis=conv['rate_basis'])
         elif inst_type == 'LIBORSwap':
-            instrument = qb.LIBORSwapInstrument(curve_date, maturity, rate, curve)
+            instrument = qb.LIBORSwapInstrument(curve_date, maturity, rate, curve,
+                    rate_basis=conv['rate_basis'],
+                    rate_period=int(conv['rate_length']),
+                    rate_period_length=conv['rate_length_type'],
+
+                    fixed_basis=conv['fixed_basis'],
+                    fixed_length=int(conv['fixed_freq']),
+                    fixed_period_length=conv['fixed_freq_length'],
+                    fixed_period_adjustment=conv['fixed_period_adj'],
+                    fixed_payment_adjustment=conv['fixed_payment_adj'],
+
+                    float_basis=conv['float_basis'],
+                    float_length=int(conv['float_freq']),
+                    float_period_length=conv['float_freq_length'],
+                    float_period_adjustment=conv['float_period_adj'],
+                    float_payment_adjustment=conv['float_payment_adj']
+                    )
         instruments.append(instrument)
     return [i for i in instruments if i is not None]
 
