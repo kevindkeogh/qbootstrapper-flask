@@ -3,7 +3,8 @@ $(document).ready(function () {
 
     var addButton = $(".add-instrument-button");
     var convButton = $(".add-convention-button");
-    var conventions;
+    var conventions; // holds object (ccy) of object (product-types)
+                     // of arrays of conventions
     var csrfToken = $("#csrf-token").val();
     var instsForm = $("#instruments-form");
     var wrapper = $(".input-instruments");
@@ -16,7 +17,7 @@ $(document).ready(function () {
         var df;
         var outputTable = $("#output-table");
         $(outputTable).empty(); // Remove all child elements
-        // in case this is not the first run
+                                // in case this is not the first run
         var headerRow = $("<thead><tr><th>Dates</th>" +
             "<th>Discount Factors</th></tr></thead>");
         $(headerRow).appendTo(outputTable);
@@ -76,8 +77,9 @@ $(document).ready(function () {
     }
 
 
-    /* Copy last instruments row and append to last row of table */
     $(addButton).click(function (e) {
+        /* Copy last instruments row and append to last row of table
+         */
         e.preventDefault();
         var lastRow = $("#instruments-table tr:last");
         var newRow = lastRow.clone(true);
@@ -109,17 +111,17 @@ $(document).ready(function () {
     });
 
 
-    /* Hijack "Add convention" button to be a link */
     $(convButton).click(function (e) {
+        /* Hijack "Add convention" button to be a link */
         e.preventDefault();
         window.location.href = "/conventions";
         return false;
     });
 
 
-    /* Submit button to perform ajax request back to /curve server endpoint
-    */
     $.ajaxSetup({
+        /* Submit button to perform ajax request back to /curve server endpoint
+        */
         beforeSend: function (xhr, settings) {
                         if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
                             xhr.setRequestHeader("X-CSRFToken", csrfToken);
@@ -128,6 +130,8 @@ $(document).ready(function () {
     });
 
     $(instsForm).submit(function (e) {
+        /* Send form back to server to bootstrap, call displayDFs on return
+         */
         e.preventDefault();
         var instsData = $(instsForm).serializeArray();
         $.ajax({
@@ -147,9 +151,9 @@ $(document).ready(function () {
     });
 
 
-    /* Send request back to the /conventions/get endpoint for conventions
-    */
     $.ajax({
+        /* Send request back to the /conventions/get endpoint for conventions
+         */
         type: "GET",
         url: "/api/v1/conventions/get",
         contentType: "application/json;charset=UTF-8",

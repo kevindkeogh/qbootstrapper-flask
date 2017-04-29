@@ -1,7 +1,8 @@
 $(document).on("change", "#conv_instrument_type", function () {
     "use strict";
     /* Watch the instrument type select and hide/unhide the
-     * fixed/float table depending on if its a swap convention */
+     * fixed/float table depending on if its a swap convention
+     */
     var tab = $("#swap-conventions-table");
     var instType = $("#conv_instrument_type").val().toLowerCase();
     if ((instType.includes("swap")) && !(tab.is(":visible"))) {
